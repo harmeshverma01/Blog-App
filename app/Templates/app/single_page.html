@@ -1,0 +1,57 @@
+{% extends 'app/structure.html' %}
+
+{% block header_title %}{{post.post_title}} - Alien's Blog {% endblock header_title %}
+
+
+{% block main_heading %}
+{{post.post_title}}
+{% endblock main_heading %}
+
+
+{% block sub_heading %}
+{{post.post_summery}}
+{% endblock sub_heading %}
+
+{% block main_image %}{{post.post_image.url}}{% endblock main_image %}
+
+{% block main_content %}
+{{post.post_body|safe}}
+{% endblock main_content %}
+
+
+{% block Comment_block %}
+<!-- Main Body -->
+<section id="comment_block">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 col-md-6 col-12 pb-4">
+                <h1>Comments</h1>
+                {% for comment in comments %}
+                   {% include 'app/single_comment.html' with comment_data=comment %}
+                {% endfor %}
+            </div>
+             <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+                 {% if user.is_authenticated %}
+                <form id="algin-form" method="post" action="{% url 'blog_app:add_comment' post.id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                    <h4>Leave a comment</h4>
+                    <label for="message">Message</label>
+                    <textarea name="msg" id=""msg cols="30" rows="5" class="form-control" style="background-color: black;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="fullname" class="form-control" disabled value={{user.get_username}}>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="post" class="btn">Post Comment</button>
+                    </div>
+                </form>
+                {%else%}
+                <h1>Please <a  class="text-warning" href= "{% url 'blog_app:login_user' %}">Login</a> to post a Comment </h1>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock Comment_block %}

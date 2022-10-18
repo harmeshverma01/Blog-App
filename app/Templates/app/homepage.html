@@ -1,0 +1,28 @@
+{% extends 'app/structure.html' %}
+{% load static %}
+
+{% block header_title %}
+Rise 4u Organization
+{% endblock header_title %}
+
+
+{% block main_heading %}
+Papa Organization
+{% endblock main_heading %}
+
+
+{% block main_image %}{%static 'app/img/home-bg.jpg' %}{% endblock main_image %}
+
+
+{% block sub_heading %}
+A blog for all the Live Legend
+{% endblock sub_heading %}
+
+
+{% block main_content %}
+{% for post in posts %}
+    {% include 'app/blog_card.html' with post=post %}
+    <hr class="my-4">
+{% endfor %}
+{% endblock main_content %}
+

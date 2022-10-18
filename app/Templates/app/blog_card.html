@@ -1,0 +1,10 @@
+<div class="post-preview">
+    <a href="{% url 'blog_app:single_post' post.id %}">
+        <h2 class="post-title">{{post.post_title}}</h2>
+        <h3 class="post-subtitle">{{post.post_summery}}</h3>
+    </a>
+    <p class="post-meta">
+        Posted by
+        <a href="#!">Admin</a>
+    </p>
+</div>
